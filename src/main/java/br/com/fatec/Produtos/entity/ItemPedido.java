@@ -25,12 +25,18 @@ public class ItemPedido implements Serializable {
     @JoinColumn(name = "id_order", nullable = false)
     private Order order;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_produto", nullable = false)
+    private Produto produto;
+
     @Column(name = "preco_unitario",nullable = false)
     private BigDecimal precoUnitario;
 
-    @Column(name = "subtotal", nullable = false)
     private BigDecimal subtotal;
 
+    public BigDecimal getSubtotal() {
+        return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+    }
 
     @Override
     public boolean equals(Object o) {

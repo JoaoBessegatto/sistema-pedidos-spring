@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "produtos")
@@ -28,4 +29,8 @@ public class Produto implements Serializable {
 
     @Column(name = "quantidade_estoque", nullable = false)
     private Integer quantidadeEstoque;
+
+    @OneToMany(mappedBy = "produto")
+    private List<ItemPedido> itens;
+
 }
