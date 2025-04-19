@@ -26,7 +26,7 @@ public class ItemPedido implements Serializable {
     private Order order;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_produto", nullable = false)
+    @JoinColumn(name = "produto", nullable = false)
     private Produto produto;
 
     @Column(name = "preco_unitario",nullable = false)

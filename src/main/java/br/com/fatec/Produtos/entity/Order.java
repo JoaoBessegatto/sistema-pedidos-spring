@@ -27,7 +27,7 @@ public class Order implements Serializable {
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
-    @OneToMany(mappedBy = "ordem", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itemPedidos;
     // BOM METODO PARA SERVICE
     public BigDecimal getValorTotal() {
