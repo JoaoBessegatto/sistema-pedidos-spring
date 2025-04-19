@@ -1,5 +1,7 @@
 package br.com.fatec.Produtos.controller;
 
+import br.com.fatec.Produtos.dto.request.ProdutoRequestDTO;
+import br.com.fatec.Produtos.dto.response.ProdutoResponseDTO;
 import br.com.fatec.Produtos.entity.Produto;
 import br.com.fatec.Produtos.service.ProdutoService;
 import org.springframework.http.HttpStatus;
@@ -19,9 +21,8 @@ public class ProdutoController {
         this.service = service;
     }
     @PostMapping
-    public ResponseEntity<Produto>save(@RequestBody Produto produto) {
-        Produto savedProduct = service.save(produto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
+    public ResponseEntity<ProdutoResponseDTO>save(@RequestBody @Valid ProdutoRequestDTO autorRequestDTO) {
+
     }
 
 
