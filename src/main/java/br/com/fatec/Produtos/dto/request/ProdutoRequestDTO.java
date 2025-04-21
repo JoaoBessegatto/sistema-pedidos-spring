@@ -1,12 +1,13 @@
 package br.com.fatec.Produtos.dto.request;
 
 import br.com.fatec.Produtos.entity.Produto;
-import jakarta.validation.constraints.NegativeOrZero;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-
+@Getter
+@Setter
 public class ProdutoRequestDTO {
     private Long id;
 
@@ -14,15 +15,15 @@ public class ProdutoRequestDTO {
     @Size(max = 45, message = "O nome deve ter no máximo 45 caracteres.")
     private String nome;
 
-    @Size(min = 1, message = "A descrição não pode ser vazia.")
+    @NotBlank(message = "A descrição é obrigatória e não pode estar vazia.")
     private String descricao;
 
-    @NotBlank(message = "O preço é obrigatório e não pode ser vazio.")
-    @NegativeOrZero(message = "O preço não pode ser negativo ou zero.")
+    @NotNull(message = "O preço é obrigatório.")
+    @Min(value = 1, message = "O preço deve ser maior que zero.")
     private BigDecimal preco;
 
-    @NotBlank(message = "A quantidade é obrigatória e não pode ser vazia.")
-    @NegativeOrZero(message = "A quantidade não pode ser negativa ou zero.")
+    @NotNull(message = "A quantidade é obrigatória.")
+    @Min(value = 1, message = "A quantidade deve ser maior que zero.")
     private Integer quantidadeEstoque;
 
     public Produto toEntity(){

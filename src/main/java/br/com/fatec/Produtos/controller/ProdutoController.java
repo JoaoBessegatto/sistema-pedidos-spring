@@ -4,6 +4,7 @@ import br.com.fatec.Produtos.dto.request.ProdutoRequestDTO;
 import br.com.fatec.Produtos.dto.response.ProdutoResponseDTO;
 import br.com.fatec.Produtos.entity.Produto;
 import br.com.fatec.Produtos.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,9 @@ public class ProdutoController {
         this.service = service;
     }
     @PostMapping
-    public ResponseEntity<ProdutoResponseDTO>save(@RequestBody @Valid ProdutoRequestDTO autorRequestDTO) {
-
+    public ResponseEntity<ProdutoResponseDTO>save(@RequestBody @Valid ProdutoRequestDTO produtoRequestDTO) {
+        ProdutoResponseDTO savedProduto = service.save(produtoRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedProduto);
     }
 
 
