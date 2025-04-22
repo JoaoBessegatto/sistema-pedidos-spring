@@ -6,7 +6,7 @@ Este projeto é uma API REST desenvolvida com **Spring Boot**, estruturada em **
 
 ## 🚀 Tecnologias Utilizadas
 
-- Java 17+
+- Java 21
 - Spring Boot
 - Spring Data JPA
 - Hibernate
