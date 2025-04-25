@@ -62,8 +62,8 @@ O projeto segue o padrão em **N camadas**:
 - `DELETE /produtos/{id}` – Remover produto
 
 ### 🔹 Ordens
-- `POST /ordens` – Criar nova ordem com itens
-- `GET /ordens` – Listar ordens
+- `POST /pedido` – Criar nova ordem com itens
+- `GET /pedido` – Listar ordens
 
 ---
 
@@ -75,4 +75,20 @@ O projeto segue o padrão em **N camadas**:
   "descricao": "Teclado RGB mecânico",
   "preco": 249.90,
   "quantidadeEstoque": 50
+}
+## 📥 Exemplo de JSON de POST para Pedido
+
+
+```json
+{
+  "itemPedidos": [
+    {
+      "produtoId": 1,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 2,
+      "quantidade": 3
+    }
+  ]
 }
