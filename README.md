@@ -15,6 +15,14 @@ Este projeto é uma API REST desenvolvida com **Spring Boot**, estruturada em **
 - Maven
 
 ---
+## 📦 Funcionalidades
+
+- Cadastro de produtos
+- Listagem de produtos
+- Criação de pedidos com múltiplos itens
+- Listagem de pedidos
+
+---
 
 ## 🧱 Estrutura do Projeto
 
@@ -67,6 +75,7 @@ O projeto segue o padrão em **N camadas**:
 
 ---
 
+
 ## 📥 Exemplo de JSON de POST para Produto
 
 ```json
@@ -76,8 +85,9 @@ O projeto segue o padrão em **N camadas**:
   "preco": 249.90,
   "quantidadeEstoque": 50
 }
+```
+---
 ## 📥 Exemplo de JSON de POST para Pedido
-
 
 ```json
 {
@@ -92,3 +102,6 @@ O projeto segue o padrão em **N camadas**:
     }
   ]
 }
+```
+
+
