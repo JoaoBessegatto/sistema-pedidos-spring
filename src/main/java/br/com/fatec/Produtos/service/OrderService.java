@@ -59,4 +59,11 @@ public class OrderService {
         Order orderSaved = dao.save(order);
         return new OrderResponseDTO(orderSaved);
     }
+    public boolean delete (Long id){
+        return dao.delete(id);
+    }
+    @Transactional(readOnly = true)
+    public List<Order>findAll(){
+        return dao.findAll();
+    }
 }
