@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -61,6 +62,10 @@ public class OrderService {
     }
     public boolean delete (Long id){
         return dao.delete(id);
+    }
+    @Transactional(readOnly = true)
+    public Optional<Order> findById(Long id){
+        return dao.findById(id);
     }
     @Transactional(readOnly = true)
     public List<Order>findAll(){

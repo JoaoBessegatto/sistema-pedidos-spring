@@ -2,14 +2,12 @@ package br.com.fatec.Produtos.controller;
 
 import br.com.fatec.Produtos.dto.request.OrderRequestDTO;
 import br.com.fatec.Produtos.dto.response.OrderResponseDTO;
-import br.com.fatec.Produtos.dto.response.ProdutoResponseDTO;
 import br.com.fatec.Produtos.entity.Order;
 import br.com.fatec.Produtos.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,4 +43,11 @@ public class OrderController {
                 .toList();
         return ResponseEntity.ok(dtos);
     }
+    @GetMapping("{id}")
+    public ResponseEntity<OrderResponseDTO>findById(@PathVariable Long id){
+        return service.findById(id)
+                .map(order -> ResponseEntity.ok(new OrderResponseDTO(order)))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
 }

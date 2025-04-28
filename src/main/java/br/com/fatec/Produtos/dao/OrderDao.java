@@ -1,6 +1,7 @@
 package br.com.fatec.Produtos.dao;
 
 import br.com.fatec.Produtos.entity.Order;
+import br.com.fatec.Produtos.entity.Produto;
 import br.com.fatec.Produtos.exception.OrderNotFoundException;
 import br.com.fatec.Produtos.exception.ProdutoNotFoundException;
 import jakarta.persistence.EntityManager;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -30,6 +32,10 @@ public class OrderDao {
         }else{
             throw new OrderNotFoundException("Pedido com id: " + id  + " não encontrado.");
         }
+    }
+    @Transactional(readOnly = true)
+    public Optional<Order>findById(Long id){
+        return Optional.ofNullable(manager.find(Order.class,id));
     }
     @Transactional(readOnly = true)
     public List<Order> findAll(){
