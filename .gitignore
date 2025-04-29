@@ -33,9 +33,9 @@ build/
 .vscode/
 
 ### Node.js e Angular ###
-/frontend/node_modules/
-/frontend/dist/
-/frontend/.angular/
+/Front-end/node_modules/
+/Front-end/dist/
+/Front-end/.angular/
 npm-debug.log
 yarn-debug.log
 yarn-error.log
