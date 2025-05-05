@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class CarrinhoComponent implements OnInit {
   produtos: Produto[] = [];
   total = 0;
-  cartCount$: Observable<number>;  // Usando Observable para o número de itens no carrinho
+  cartCount$: Observable<number>;
 
   constructor(
     private carrinhoService: CarrinhoService,
@@ -24,7 +24,7 @@ export class CarrinhoComponent implements OnInit {
     private http: HttpClient,
     private router: Router
   ) {
-    this.cartCount$ = this.carrinhoService.cartCount$;  // Substitui cartCount por cartCount$
+    this.cartCount$ = this.carrinhoService.cartCount$;
   }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   calcularTotal(): number {
-    this.total = this.produtos.reduce((soma: number, item: Produto) => soma + item.preco * (item.quantidade || 1), 0);  // Multiplica preço pela quantidade
+    this.total = this.produtos.reduce((soma: number, item: Produto) => soma + item.preco * (item.quantidade || 1), 0);
     return this.total;
   }
 
@@ -47,25 +47,35 @@ export class CarrinhoComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  // Função para garantir que a quantidade não seja nula ou negativa
+  verificarQuantidade(produto: Produto): number {
+    return produto.quantidade > 0 ? produto.quantidade : 1;  // Garantir que a quantidade seja pelo menos 1
+  }
+
   finalizarCompra(): void {
+    // Mapeando os itens para enviar para a API, garantindo que a quantidade não seja nula ou negativa
     const itemPedidosMap = new Map<number, number>();
 
     this.produtos.forEach(produto => {
       const id = produto.id;
+      const quantidade = this.verificarQuantidade(produto);  // Garantir que a quantidade seja válida
       if (itemPedidosMap.has(id)) {
-        itemPedidosMap.set(id, itemPedidosMap.get(id)! + produto.quantidade);  // Usando a quantidade de cada item
+        itemPedidosMap.set(id, itemPedidosMap.get(id)! + quantidade);  // Soma a quantidade de um produto já existente
       } else {
-        itemPedidosMap.set(id, produto.quantidade);
+        itemPedidosMap.set(id, quantidade);  // Adiciona um novo produto
       }
     });
 
+    // Mapeia os itens para o formato esperado pela API
     const itemPedidos = Array.from(itemPedidosMap.entries()).map(([produtoId, quantidade]) => ({
       produtoId,
       quantidade
     }));
 
+    // Corpo da requisição para finalizar a compra
     const pedido = { itemPedidos };
 
+    // Envia a requisição para o backend
     this.http.post('http://localhost:8080/pedido', pedido).subscribe({
       next: () => {
         alert('Compra finalizada com sucesso!');
@@ -76,7 +86,7 @@ export class CarrinhoComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao finalizar compra:', err);
-        alert('Erro ao finalizar compra.');
+        alert('Erro ao finalizar compra. Por favor, tente novamente.');
       }
     });
   }
