@@ -1,0 +1,49 @@
+body {
+  background: linear-gradient(180deg, #121212, #1a1a1a);
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.text-accent {
+  color: #00c6ff;
+}
+
+.btn-accent {
+  background-color: #00c6ff;
+  border: none;
+  color: #fff;
+
+  &:hover {
+    background-color: #00a7d6;
+  }
+}
+
+.btn-outline-light {
+  border-color: #ccc;
+  color: #fff;
+
+  &:hover {
+    background-color: #444;
+    border-color: #888;
+  }
+}
+
+.carrinho-card {
+  background: linear-gradient(145deg, #1f1f1f, #2c2c2c);
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  .img-carrinho {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+}

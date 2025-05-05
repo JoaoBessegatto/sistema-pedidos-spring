@@ -4,7 +4,7 @@
       class="col-12 col-sm-6 col-md-4 col-lg-3"
       *ngFor="let produto of produtos; let i = index"
     >
-      <div class="card h-100 shadow-sm d-flex flex-column">
+      <div class="card product-card h-100 d-flex flex-column">
         <div class="bg-image hover-overlay ripple">
           <img
             [src]="'assets/img/produto' + (i + 1) + '.jpg'"
@@ -16,11 +16,10 @@
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ produto.nome }}</h5>
           <p class="card-text small">{{ produto.descricao }}</p>
-          <p class="card-text fw-bold mt-auto">R$ {{ produto.preco | number:'1.2-2' }}</p>
-          
+          <p class="card-text fw-bold mt-auto text-accent">R$ {{ produto.preco | number:'1.2-2' }}</p>
           <div class="mt-auto d-flex justify-content-between gap-2">
-            <a href="#" class="btn btn-outline-secondary btn-sm w-100">Detalhes</a>
-            <button href="admin/carrinho" type="button" class="btn btn-primary btn-sm" (click)="adicionarAoCarrinho(produto)">
+            <a href="#" class="btn btn-outline-light btn-sm w-100">Detalhes</a>
+            <button type="button" class="btn btn-accent btn-sm" (click)="adicionarAoCarrinho(produto)">
               Comprar
             </button>            
           </div>

@@ -7,6 +7,7 @@ import { CarrinhoService } from '../../../service/carrinho.service';
 @Component({
   selector: 'app-produtos',
   templateUrl: './produto-list.component.html',
+  styleUrl: './produto-list.component.scss',
   standalone: true,
   imports: [CommonModule],
 })
