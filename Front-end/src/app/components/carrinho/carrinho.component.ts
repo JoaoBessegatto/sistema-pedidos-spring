@@ -1,9 +1,10 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Produto } from '../../model/produto';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-carrinho',
@@ -12,16 +13,19 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
 })
-export class CarrinhoComponent {
+export class CarrinhoComponent implements OnInit {
   produtos: Produto[] = [];
   total = 0;
+  cartCount$: Observable<number>;  // Usando Observable para o número de itens no carrinho
 
   constructor(
     private carrinhoService: CarrinhoService,
     private cdr: ChangeDetectorRef,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+    this.cartCount$ = this.carrinhoService.cartCount$;  // Substitui cartCount por cartCount$
+  }
 
   ngOnInit(): void {
     this.produtos = this.carrinhoService.getItens();
@@ -35,7 +39,7 @@ export class CarrinhoComponent {
   }
 
   calcularTotal(): number {
-    this.total = this.produtos.reduce((soma: number, item: Produto) => soma + item.preco, 0);
+    this.total = this.produtos.reduce((soma: number, item: Produto) => soma + item.preco * (item.quantidade || 1), 0);  // Multiplica preço pela quantidade
     return this.total;
   }
 
@@ -49,9 +53,9 @@ export class CarrinhoComponent {
     this.produtos.forEach(produto => {
       const id = produto.id;
       if (itemPedidosMap.has(id)) {
-        itemPedidosMap.set(id, itemPedidosMap.get(id)! + 1);
+        itemPedidosMap.set(id, itemPedidosMap.get(id)! + produto.quantidade);  // Usando a quantidade de cada item
       } else {
-        itemPedidosMap.set(id, 1);
+        itemPedidosMap.set(id, produto.quantidade);
       }
     });
 

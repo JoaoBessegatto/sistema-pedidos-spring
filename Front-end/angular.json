@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+                "node_modules/mdb-angular-ui-kit/assets/scss/mdb.scss",
+                "src/styles.scss"
             ],
             "scripts": [
               "node_modules/chart.js/dist/chart.js"

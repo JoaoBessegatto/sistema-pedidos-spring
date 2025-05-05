@@ -21,7 +21,7 @@
 
     <div class="col-12 text-end mt-4 text-light">
       <h4>Total: <span class="text-accent">R$ {{ calcularTotal() | number:'1.2-2' }}</span></h4>
-      <button class="btn btn-accent mt-2">Finalizar Compra</button>
+      <button class="btn btn-success mt-2" (click)="finalizarCompra()">Finalizar Compra</button>
     </div>
   </div>
 

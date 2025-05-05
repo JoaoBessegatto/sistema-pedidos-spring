@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CarrinhoService } from '../../../service/carrinho.service';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MdbCollapseModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss'
+  styleUrls: ['./menu.component.scss'] 
 })
 export class MenuComponent {
+  isCollapsed = true;
 
+  cartCount$ = this.carrinhoService.cartCount$;
+
+  constructor(private carrinhoService: CarrinhoService) {}
 }

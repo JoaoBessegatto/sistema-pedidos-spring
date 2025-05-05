@@ -2,15 +2,15 @@
 <nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
     <!-- Brand -->
-    <a class="navbar-brand fw-bold text-uppercase" href="/">E-commerce</a>
+    <a class="navbar-brand fw-bold text-uppercase" routerLink="/">E-commerce</a>
 
     <!-- Toggle button -->
     <button
       class="navbar-toggler"
       type="button"
-      (click)="navbarCollapse.toggle()"
+      (click)="isCollapsed = !isCollapsed"
       aria-controls="navbarNav"
-      aria-expanded="false"
+      [attr.aria-expanded]="!isCollapsed"
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
@@ -19,20 +19,26 @@
     <!-- Collapsible content -->
     <div
       class="collapse navbar-collapse"
+      [class.show]="!isCollapsed"
       id="navbarNav"
-      mdbCollapse
-      #navbarCollapse="mdbCollapse"
     >
-      <!-- AQUI usamos 'me-auto' para manter os itens à esquerda -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/admin/produtos">Produtos</a>
+          <a class="nav-link icon-link" routerLink="/admin/produtos">
+            <i class="fa-solid fa-box-open fa-fw icon-style"></i>
+            Produtos
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/admin/carrinho">Carrinho</a>
+        <li class="nav-item position-relative">
+          <a class="nav-link icon-link" routerLink="/admin/carrinho">
+            <i class="fa-solid fa-cart-shopping fa-fw icon-style"></i>
+            Carrinho
+            <ng-container *ngIf="(cartCount$ | async) as count">
+              <span *ngIf="count > 0" class="cart-badge">{{ count }}</span>
+            </ng-container>
+          </a>
         </li>
       </ul>
     </div>
-    <!-- Collapsible content -->
   </div>
 </nav>
