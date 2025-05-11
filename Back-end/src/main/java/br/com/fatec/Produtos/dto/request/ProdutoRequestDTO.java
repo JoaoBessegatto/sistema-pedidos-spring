@@ -16,7 +16,11 @@ public class ProdutoRequestDTO {
     private String nome;
 
     @NotBlank(message = "A descrição é obrigatória e não pode estar vazia.")
+    @Size(max = 100, message = "A descrição basica deve ter no máximo 100 caracteres")
     private String descricao;
+
+    @NotBlank(message = "A descrição é obrigatória e não pode estar vazia.")
+    private String bigDescricao;
 
     @NotNull(message = "O preço é obrigatório.")
     @Min(value = 1, message = "O preço deve ser maior que zero.")

@@ -35,6 +35,12 @@ public class ProdutoService {
         if(produtoRequestDTO.getPreco() != null){
             produtoExistente.setPreco(produtoRequestDTO.getPreco());
         }
+        if(produtoRequestDTO.getDescricao() != null){
+            produtoExistente.setDescricao(produtoRequestDTO.getDescricao());
+        }
+        if(produtoRequestDTO.getBigDescricao() != null){
+            produtoExistente.setBigDescricao(produtoRequestDTO.getBigDescricao());
+        }
         Produto updateProduto = dao.update(produtoExistente);
         return new ProdutoResponseDTO(updateProduto);
     }
