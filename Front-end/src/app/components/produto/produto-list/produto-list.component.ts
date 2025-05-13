@@ -3,13 +3,14 @@ import { Produto } from '../../../model/produto';
 import { ProdutoService } from '../../../service/produto-services';
 import { CommonModule } from '@angular/common';
 import { CarrinhoService } from '../../../service/carrinho.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
   templateUrl: './produto-list.component.html',
-  styleUrl: './produto-list.component.scss',
+  styleUrls: ['./produto-list.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
 })
 export class ProdutosComponent implements OnInit {
   produtos: Produto[] = [];

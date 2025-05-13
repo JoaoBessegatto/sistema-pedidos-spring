@@ -5,12 +5,14 @@ import { ProdutosComponent } from './components/produto/produto-list/produto-lis
 import { ProdutoDetailComponent } from './components/produto/produto-detail/produto-detail.component';
 import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 
-export const routes: Routes = [
-    {path: "", redirectTo: "login", pathMatch: 'full'},
-    {path: "login", component: LoginComponent},
-    {path: "admin", component: PrincipalComponent, children:[
-        {path: "produtos", component: ProdutosComponent},
-        {path: "produto/detalhes", component: ProdutoDetailComponent},
-        {path: "carrinho",component: CarrinhoComponent}
-    ]}
+export const routes: Routes = [   
+  { path: "", redirectTo: "login", pathMatch: 'full' },
+  { path: "login", component: LoginComponent },
+  {
+    path: "admin", component: PrincipalComponent, children: [
+      { path: "produtos", component: ProdutosComponent },
+      { path: "produtos/detalhes", component: ProdutoDetailComponent },
+      { path: "carrinho", component: CarrinhoComponent }
+    ]
+  }
 ];

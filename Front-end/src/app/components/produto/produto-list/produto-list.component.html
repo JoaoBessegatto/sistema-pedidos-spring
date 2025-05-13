@@ -18,7 +18,11 @@
           <p class="card-text small">{{ produto.descricao }}</p>
           <p class="card-text fw-bold mt-auto text-accent">R$ {{ produto.preco | number:'1.2-2' }}</p>
           <div class="mt-auto d-flex justify-content-between gap-2">
-            <a href="admin/produto/detalhes" class="btn btn-outline-light btn-sm w-100">Detalhes</a>
+            <a [routerLink]="['/admin/produtos/detalhes']" 
+                [queryParams]="{ id: produto.id }" 
+                class="btn btn-outline-light btn-sm w-100">
+                Detalhes
+            </a>
             <button type="button" class="btn btn-accent btn-sm" (click)="adicionarAoCarrinho(produto)">
               Comprar
             </button>            

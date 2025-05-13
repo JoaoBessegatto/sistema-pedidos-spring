@@ -1,1 +1,30 @@
-<p>produto-detail works!</p>
+<div class="container mt-4" *ngIf="produto">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <img [src]="'assets/img/produto' + produto.id + '.jpg'" alt="{{ produto.nome }}" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">{{ produto.nome }}</h2>
+          <p class="card-text"><strong>Descrição:</strong> {{ produto.descricao }}</p>
+          <p class="card-text"><strong>Preço:</strong> {{ produto.preco | currency:'BRL':'symbol':'1.2-2' }}</p>
+
+          <button (click)="adicionarAoCarrinho()" class="btn btn-primary btn-block">
+            Adicionar ao Carrinho
+          </button>
+          <a [routerLink]="['/admin/produtos']" class="btn btn-secondary btn-block mt-2">
+            Voltar para Produtos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Caso o produto não seja encontrado, uma mensagem de erro -->
+<div class="alert alert-danger" *ngIf="!produto">
+  Produto não encontrado. Por favor, volte para a lista de produtos.
+</div>
