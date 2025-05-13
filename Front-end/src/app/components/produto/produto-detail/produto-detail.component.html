@@ -9,7 +9,7 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">{{ produto.nome }}</h2>
-          <p class="card-text"><strong>Descrição:</strong> {{ produto.descricao }}</p>
+          <p class="card-text"><strong>Descrição:</strong> {{ produto.bigDescricao }}</p>
           <p class="card-text"><strong>Preço:</strong> {{ produto.preco | currency:'BRL':'symbol':'1.2-2' }}</p>
 
           <button (click)="adicionarAoCarrinho()" class="btn btn-primary btn-block">
