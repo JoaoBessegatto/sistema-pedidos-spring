@@ -35,6 +35,7 @@ public class ProdutoRequestDTO {
         produto.setId(this.id);
         produto.setNome(this.nome);
         produto.setDescricao(this.descricao);
+        produto.setBigDescricao(this.bigDescricao);
         produto.setPreco(this.preco);
         produto.setQuantidadeEstoque(this.quantidadeEstoque);
         return produto;
