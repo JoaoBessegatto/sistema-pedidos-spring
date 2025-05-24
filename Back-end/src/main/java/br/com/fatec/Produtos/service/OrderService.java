@@ -62,7 +62,7 @@ public class OrderService {
         order.setItemPedidos(itens);
         order.setValorTotal(total);
         Order orderSaved = dao.save(order);
-        emailService.enviarEmailTexto("bfjoaop@gmail.com","Pedido concluido com sucesso", "o deu pedido tem ");
+        emailService.enviarEmailTexto("bfjoaop@gmail.com","Pedido concluido com sucesso", "o pedido tem ");
         return new OrderResponseDTO(orderSaved);
     }
     public boolean delete (Long id){
