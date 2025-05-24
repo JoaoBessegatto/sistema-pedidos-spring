@@ -32,6 +32,7 @@ public class ItemPedido implements Serializable {
     @Column(name = "preco_unitario",nullable = false)
     private BigDecimal precoUnitario;
 
+    @Transient
     private BigDecimal subtotal;
 
     public BigDecimal getSubtotal() {

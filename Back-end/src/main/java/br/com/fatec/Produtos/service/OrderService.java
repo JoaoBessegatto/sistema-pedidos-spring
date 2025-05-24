@@ -10,6 +10,7 @@ import br.com.fatec.Produtos.entity.Order;
 import br.com.fatec.Produtos.entity.Produto;
 import br.com.fatec.Produtos.exception.EstoqueInsuficienteException;
 import br.com.fatec.Produtos.exception.ProdutoNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ import java.util.Optional;
 
 @Service
 public class OrderService {
+    @Autowired
+    EmailService emailService;
+
     private final OrderDao dao;
     private final ProdutoDao produtoDao;
 
@@ -58,6 +62,7 @@ public class OrderService {
         order.setItemPedidos(itens);
         order.setValorTotal(total);
         Order orderSaved = dao.save(order);
+        emailService.enviarEmailTexto("bfjoaop@gmail.com","Pedido concluido com sucesso", "o deu pedido tem ");
         return new OrderResponseDTO(orderSaved);
     }
     public boolean delete (Long id){

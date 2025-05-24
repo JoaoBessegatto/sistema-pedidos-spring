@@ -29,7 +29,6 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itemPedidos;
-    // BOM METODO PARA SERVICE
     public BigDecimal getValorTotal() {
         return itemPedidos.stream()
                 .map(ItemPedido::getSubtotal)
