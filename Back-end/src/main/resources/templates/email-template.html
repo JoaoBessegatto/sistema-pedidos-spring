@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação de Pedido</title>
+</head>
+<body>
+<h2>Olá, <span th:text="${nome}">Cliente</span>!</h2>
+<p>Seu pedido <strong>#<span th:text="${pedidoId}"></span></strong> foi confirmado com sucesso.</p>
+<p>Total: R$ <span th:text="${total}"></span></p>
+</body>
+</html>

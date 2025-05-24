@@ -4,6 +4,7 @@ import br.com.fatec.Produtos.dto.request.OrderRequestDTO;
 import br.com.fatec.Produtos.dto.response.OrderResponseDTO;
 import br.com.fatec.Produtos.entity.Order;
 import br.com.fatec.Produtos.service.OrderService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponseDTO>save(@RequestBody @Valid OrderRequestDTO orderRequestDTO){
+    public ResponseEntity<OrderResponseDTO>save(@RequestBody @Valid OrderRequestDTO orderRequestDTO) throws MessagingException {
         OrderResponseDTO OrderSave = service.save(orderRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(OrderSave);
     }

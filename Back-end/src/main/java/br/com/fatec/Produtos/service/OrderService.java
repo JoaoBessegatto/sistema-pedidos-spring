@@ -10,15 +10,14 @@ import br.com.fatec.Produtos.entity.Order;
 import br.com.fatec.Produtos.entity.Produto;
 import br.com.fatec.Produtos.exception.EstoqueInsuficienteException;
 import br.com.fatec.Produtos.exception.ProdutoNotFoundException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -33,7 +32,7 @@ public class OrderService {
         this.produtoDao = produtoDao;
     }
     @Transactional
-    public OrderResponseDTO save (OrderRequestDTO orderRequestDTO){
+    public OrderResponseDTO save (OrderRequestDTO orderRequestDTO) throws MessagingException {
         Order order = new Order();
         order.setData(LocalDateTime.now());
 
@@ -62,8 +61,19 @@ public class OrderService {
         order.setItemPedidos(itens);
         order.setValorTotal(total);
         Order orderSaved = dao.save(order);
-        emailService.enviarEmailTexto("bfjoaop@gmail.com","Pedido concluido com sucesso", "o pedido tem ");
-        return new OrderResponseDTO(orderSaved);
+        try{
+            Map<String, Object> dados = new HashMap<>();
+            dados.put("nome","João Pedro");
+            dados.put("pedidoId",  order.getId());
+            dados.put("total", order.getValorTotal());
+            emailService.enviarEmailComTemplate("bfjoaop@gmail.com",
+                    "Confirmação de compra",
+                    "email-template",
+                    dados);
+            return new OrderResponseDTO(orderSaved);
+        }catch (Exception e){
+            throw new MessagingException("erro na criação de email");
+        }
     }
     public boolean delete (Long id){
         return dao.delete(id);
