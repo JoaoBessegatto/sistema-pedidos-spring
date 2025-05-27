@@ -10,6 +10,7 @@ import br.com.fatec.Produtos.entity.Order;
 import br.com.fatec.Produtos.entity.Produto;
 import br.com.fatec.Produtos.exception.EstoqueInsuficienteException;
 import br.com.fatec.Produtos.exception.ProdutoNotFoundException;
+import ch.qos.logback.core.BasicStatusManager;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,20 +62,39 @@ public class OrderService {
         order.setItemPedidos(itens);
         order.setValorTotal(total);
         Order orderSaved = dao.save(order);
-        try{
-            Map<String, Object> dados = new HashMap<>();
-            dados.put("nome","João Pedro");
-            dados.put("pedidoId",  order.getId());
-            dados.put("total", order.getValorTotal());
-            emailService.enviarEmailComTemplate("bfjoaop@gmail.com",
+        try {
+            Map<String, Object> dados = getStringObjectMap(itens, order);
+            emailService.enviarEmailComTemplate(
+                    "bfjoaop@gmail.com",
                     "Confirmação de compra",
                     "email-template",
-                    dados);
+                    dados
+            );
             return new OrderResponseDTO(orderSaved);
         }catch (Exception e){
             throw new MessagingException("erro na criação de email");
+            
         }
     }
+
+    private static Map<String, Object> getStringObjectMap(List<ItemPedido> itens, Order order) {
+        List<Map<String, Object>> produtos = new ArrayList<>();
+        for (ItemPedido item : itens) {
+            Map<String, Object> p = new HashMap<>();
+            p.put("nome", item.getProduto().getNome());
+            p.put("quantidade", item.getQuantidade());
+            p.put("preco", item.getPrecoUnitario());
+            produtos.add(p);
+        }
+
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", "João Pedro");
+        dados.put("pedidoId", order.getId());
+        dados.put("total", order.getValorTotal());
+        dados.put("produtos", produtos);
+        return dados;
+    }
+
     public boolean delete (Long id){
         return dao.delete(id);
     }
