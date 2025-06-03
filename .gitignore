@@ -41,4 +41,4 @@ yarn-debug.log
 yarn-error.log
 /Front-end/.env
 .DS_Store
-
+Front-end/.DS_Store
