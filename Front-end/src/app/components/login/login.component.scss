@@ -1,0 +1,27 @@
+
+.topo{
+    top: 30vh;
+    position: relative;
+}
+body {
+    background-color: #121212;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #1e1e1e;
+    border-radius: 1rem;
+    border: 1px solid #333;
+  }
+  
+  .btn-accent {
+    background-color: #4dabf7;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-accent:hover {
+    background-color: #339af0;
+  }
+  

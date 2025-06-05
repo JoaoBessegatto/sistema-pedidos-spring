@@ -1,0 +1,64 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card p-4 shadow-lg login-card">
+    <div class="card-body">
+      <h3 class="text-center text-light mb-4">Cadastro</h3>
+
+      <form (ngSubmit)="cadastrar()">
+        <mdb-form-control>
+          <input 
+            mdbInput 
+            type="text" 
+            id="usuario" 
+            class="form-control bg-dark text-light border-secondary" 
+            [(ngModel)]="usuario.username" 
+            name="username" 
+            required 
+          />
+          <label mdbLabel class="form-label text-light" for="usuario">Usuário</label>
+        </mdb-form-control>
+
+        <br />
+
+        <mdb-form-control>
+          <input 
+            mdbInput 
+            type="password" 
+            id="senha" 
+            class="form-control bg-dark text-light border-secondary" 
+            [(ngModel)]="usuario.password" 
+            name="password" 
+            required 
+          />
+          <label mdbLabel class="form-label text-light" for="senha">Senha</label>
+        </mdb-form-control>
+
+        <br />
+
+        <button 
+          type="submit" 
+          class="btn btn-accent w-100 btn-rounded" 
+          [disabled]="isLoading"
+          mdbRipple
+        >
+          {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
+        </button>
+
+        <button 
+          type="button" 
+          class="btn btn-outline-light w-100 btn-rounded mt-2" 
+          [routerLink]="['/login']"
+          mdbRipple
+        >
+          Voltar para Login
+        </button>
+
+        <div *ngIf="successMessage" class="alert alert-success mt-3">
+          {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
