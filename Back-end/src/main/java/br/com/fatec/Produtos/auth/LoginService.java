@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
 	@Autowired
-	private LoginRepository repository;
+	private UsuarioRepository repository;
 	@Autowired
 	private JwtServiceGenerator jwtService;
 	@Autowired
