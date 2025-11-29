@@ -11,7 +11,7 @@ Este projeto é uma API REST desenvolvida com **Spring Boot**, estruturada em **
 - Spring Data JPA
 - Hibernate
 - Lombok
-- H2 Database (ou MySQL)
+- MySQL
 - Maven
 
 ---
